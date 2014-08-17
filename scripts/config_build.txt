@@ -1,12 +1,11 @@
-seattlelib_v1/*
-timeserver/*
-utf/*
-repy_v2/*
-portability/*
-dist/LICENSE.txt
+dependencies/seattlelib_v1/*
+../*
+dependencies/repy_v2/*
+dependencies/portability/*
+common/*
+common/utf/*
 # Tests
-test seattlelib_v1/tests/*
-test seattlelib_v1/test/*
-test repy_v2/testsV2/*
-test portability/tests/*
-test nodemanager/tests/restrictions.test
+test dependencies/seattlelib_v1/tests/*
+test dependencies/seattlelib_v1/test/*
+test dependencies/repy_v2/testsV2/*
+test dependencies/portability/tests/*
