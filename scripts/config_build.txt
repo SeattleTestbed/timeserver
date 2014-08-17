@@ -9,3 +9,4 @@ test dependencies/seattlelib_v1/tests/*
 test dependencies/seattlelib_v1/test/*
 test dependencies/repy_v2/testsV2/*
 test dependencies/portability/tests/*
+test ../tests/*
