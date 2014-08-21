@@ -1,4 +1,4 @@
-seattlelib_v1/*
+seattlelib_v2/*
 ../*
 repy_v2/*
 portability/*
