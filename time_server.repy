@@ -54,7 +54,7 @@ def send_time_to_client(ip,port,sockobj,thiscommhandle,listencommhandle):
   mycontext['count']+=1
   
   if mycontext['count'] % 10 == 0:
-    print 'serviced requests: '+str(mycontext['count'])
+    print 'Unix time:', time_gettime() - 2208988800, 'serviced requests:', mycontext['count']
   mycontext['count_lock'].release()
   
 
@@ -75,6 +75,7 @@ if callfunc == 'initialize':
   else:
     port = 12345
     ip = '127.0.0.1'
+    print 'You did not supply a server port I should listen on. Using default port', port
 
   # track how many connections are made so we have an idea of how
   # often this service is used
@@ -82,10 +83,12 @@ if callfunc == 'initialize':
   mycontext['count_lock'] = getlock()  
 
   # Establish time via a connection to a NTP server
+  print "Getting NTP timestamp..."
   obtainingtime = True
   while obtainingtime:
     try:
-      time_updatetime(port)  
+      time_updatetime(port)
+      print "Got timestamp."
     except Exception,e:
       print e, " trying again to connect to a NTP"  # print exception, try again
     else:
@@ -93,9 +96,11 @@ if callfunc == 'initialize':
 
 
 
+  print 'time_server to listen on IP address', ip, 'port', port, 'now.'
   listencommhandle = waitforconn(ip,port,send_time_to_client)
 
 
   # Begin announcing presence to central server
   ipPortstring = "%s:%s"%(ip,port)
   time_server_announce(ipPortstring)
+
