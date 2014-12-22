@@ -83,17 +83,11 @@ if callfunc == 'initialize':
   mycontext['count_lock'] = getlock()  
 
   # Establish time via a connection to a NTP server
+  # Don't spin in a loop if we fail -- the error might be on our 
+  # side, not the NTP server's (disallowed port, no connectivity, etc.)
   print "Getting NTP timestamp..."
-  obtainingtime = True
-  while obtainingtime:
-    try:
-      time_updatetime(port)
-      print "Got timestamp."
-    except Exception,e:
-      print e, " trying again to connect to a NTP"  # print exception, try again
-    else:
-      obtainingtime = False             # time obtained, exit while loop
-
+  time_updatetime(port)
+  print "Got timestamp."
 
 
   print 'time_server to listen on IP address', ip, 'port', port, 'now.'
